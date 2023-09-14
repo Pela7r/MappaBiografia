@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa con Popup</title>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoicGVsYTciLCJhIjoiY2xtZ2lyaDEyMDZoODNycW56d2tzbWNiZyJ9.kQ9RMGdl5RFaw4Spniw5nw'; 
+
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [10.3279,44.8015], // Centro della mappa
+            zoom: 10
+        });
+
+        const geojsonData = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [12.5224468766125, 41.89105711094495]
+                    },
+                    "properties": {
+                        "title": "foto scattata a due amiche durante un giorno di set, giugno 2022. è stata la mia prima volta a Roma, ma avendo lavorato per tutto il tempo, non ho avuto modo di visitare nulla. Mi è però rimasta una grande voglia di tornarci con più calma, e appena è successo, mi sono innamorato di quella meravigliosa città",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=15mA1H2mq2sBddh0-fZWk6rbgs_YJ2r1y",
+                        "colore": "giallo"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.196101, 44.839253]
+                    },
+                    "properties": {
+                        "title": "Qui Ã¨ dove sono nato, 01/07/98, mia madre ha scelto di partorire me e mia sorella in casa, come si faceva un tempo, forse Ã¨ una cosa da niente ma in qualche modo ne vado fiero. Torno tutt'ora in questo luogo sperso in mezzo alle campagne parmensi a trovare i miei genitori, e cercare un po' di pace dalla metropoli di Milano.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1d8OXEAKPW6dt9e3yDXVqJ6KkkQbOjONX",
+                        "colore": "giallo"
+                    }
+                },
+       {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [15.650234, 38.265840]
+                    },
+                    "properties": {
+                        "title": "Torrefaro, luglio 2022. Nella foto si vede il pilone che serviva a sostenere il cavo elettrico sospeso più lungo d'Europa, per ben tre chilometri, tra Sicilia e Calabria. quest'opera mi ha affascinato dal primo momento in cui l'ho vista, ed è rimasta un simbolo della bellissima vacanza a Torrefaro e dintorni di quell'estate.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=15GbHzQ0UKyqmZBQCc4yqeE5FWhCQq-9_",
+                        "colore": "giallo"
+                    }
+                },
+   {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [9.210781, 45.444524]
+                    },
+                    "properties": {
+                        "title": "Un piacevole pranzo a casa mia, aprile 2023. Con la mia amica di vecchia data Rebecca, Francesco e il mio coinquilino Enrico. Rebecca porta sempre la birra quando viene invitata a pranzo.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1KgipWsxL2aTbEdSmXV0MYx-Ijc-tY0bq",
+                        "colore": "giallo"
+                    }
+                },
+   
+   {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.186515, 43.938087]
+                    },
+                    "properties": {
+                        "title": "Una foto dal mio primo rullino, agosto 2021. Il primo rullino che ho scattato, lo avevo trovato in un cassetto di casa dei miei genitori, ho pensato che ofsse vergine e me lo sono portato in vacanza per iniziare a sperimentare con la macchina fotografica analogica di mio padre. Una volta sviluppato, con grande sorpresa, ho scoperto che il rullino era già interamente impresso, avevo scattato le mie fotografie su vecchi ricordi di quado ero piccolo, in questo casa una festa di compleanno di chissà quanti anni prima. Ero dispiaciuto da un lato di aver rovinato quelle foto, ma d'altro canto ne sono uscite sovrapposizione molto interessanti, e penso che se non lo avessi scattato di nuovo, quelle foto non sarebbero mai state sviluppate.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1kq2LEKcSfaeHtsYGqX7snSh9J-NUazMS",
+                        "colore": "blu"
+                    }
+                },
+   {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.325525163694854, 44.80534743338292]
+                    },
+                    "properties": {
+                        "title": "La mia prima ragazza, 2013. Siamo stati insieme per tre anni, con alti e bassi, da adolescenti si vivono le cose in maniera molto intensa, ci siamo lasciati per un tradimento, verso la fine delle superiori. La ricordo con grande affetto, rappresenta una persona molto importante nella mia storia.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1U0lg97PckWAs4w0JzzJUOgcLN8DRSCV6",
+                        "colore": "rosa"
+                    }
+                },
+              {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.326395, 44.787320]
+                    },
+                    "properties": {
+                        "title": "Mia sorella che gioca con il nostro cane, Marzo 2023. Un momento di allegria e gioco, mia sorella ama gli animali ed è una persona estremamente giocosa e solare, a differenza mia che sono più introverso, abbiamo tuttavia un bellissimo rapporto. (Django è un cane pieno di vitalità e molto simpatico).",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1tQ0_RAcN_r1kdbQnJTFIHINfoRyuake5",
+                        "colore": "giallo"
+                    }
+                },
+  {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [ 9.175974, 45.485452]
+                    },
+                    "properties": {
+                        "title": "Festa di compleanno di due carissimi amici conosciuti qui a milano, Enrico e Chenxi, 23 settembre 2022. Una serata pazza e divertente al tempio del futuro perduto, bei momenti da ricordare, non ho molto altro da aggiungere.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1SBhkxHiN3FWvLogVnzlqb52wwX2_JJgZ",
+                        "colore": "giallo"
+                    }
+                },
+{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.358451, 44.788780]
+                    },
+                    "properties": {
+                        "title": "La mia rockband delle superiori, 2015. Trovarci per suonare era molto importante, la band era quasi una seconda famiglia, un modo per staccare da tutto e da tutti. Alex alla voce, Pietro alla chitarra e seconda voce, Tancredi alla batteria, e io appassionato bassista. Dopo un paio di anni ci siamo tutti trasferiti in altre città, e con il progetto, è morta anche la mia voglia di continuare a suonare.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1pM4WJjCqf_avjh-NZsYny54f_DsCyzwU",
+                        "colore": "giallo"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [9.187211, 45.454960]
+                    },
+                    "properties": {
+                        "title": "Quando sono caduto in motorino con Feres, maggio 2022. Siamo saliti su un motorino a noleggio per tornare a casa, dopo aver bevuto un bicchiere di troppo a una festa, a metÃ  strada siamo scivolati sul binario del tram uscendone, per fortuna, solo con qualche graffio. Ricordi che a posteriori, fanno sempre sorridere, nella consapevolezza di quanto ci sia andata bene.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=10SxV4-1EPN7g6XaIwOe_yt2zPO4Y5v4e",
+                        "colore": "blu"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.326446, 44.787258]
+                    },
+                    "properties": {
+                        "title": "La mia festa di Laurea luglio 2021. Ã¨ stato senza dubbio un bel momento, come lo è ogni festa di laurea, i parenti gli amici e tutte le persone che ci vogliono bene a festeggiare con noi un grande successo. purtroppo alcuni dei miei amici non erano presenti perchÃ¨ era appena scoppiato un litigio interno al gruppo che aveva creato una netta divisione, in quei momenti è più difficile apprezzare la presenza di chi c'è, perchè inevitabilmente, si sente la mancanza di tutti gli altri. Ma una festa è una festa, e bisogna sempre cercare di divertirsi.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1g18sXOQC8tNjX5ZaBPvRA452WjWX4Lh5",
+                        "colore": "giallo"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.325737, 44.805679]
+                    },
+                    "properties": {
+                        "title": "ultimo giorno di scuola, luglio 2017. Quel momento tanto atteso per anni, si Ã¨ rivelato una tragedia non appena Ã¨ arrivato il giorno, il pensiero di non vedere piÃ¹ tutti i miei compagni, o almeno non vederli ogni giorno com'era stato fino ad allora, ci ha fatto provare grande tristezza e malinconia. Il tempo ci ha comunque restituito un rapporto duraturo, almeno con i più affezionati.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1nwWgNvQxRrjdwIgE3BpiloniVp7X5yWI",
+                        "colore": "blu"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [11.571834, 43.311243]
+                    },
+                    "properties": {
+                        "title": "In viaggio per Roma con la mia ragazza, marzo 2023. Uno dei tanti momenti con una delle persone che in questo periodo riesce a farmi sentire meglio in assoluto, anche in attivitÃ  semplici come un viaggio in treno.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1LQE4sxsiFCZ_u6H9_LlZiivH11iSeThS",
+                        "colore": "rosa"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.137737, 44.347176]
+                    },
+                    "properties": {
+                        "title": "Quando sono caduto in moto, 03/09/2023, una banale scivolata sulla ghiaia mentre parcheggiavo la mia moto vicino a un bellissimo lago che sono andato a visitare con i miei amici di una vita che ormai, riesco a vedere solo poche volte all'anno.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1MXQbi7wcRHwYn8ftyQRkfu8W2cpNZ1Ay",
+                        "colore": "blu"
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [11.956927, 36.768077]
+                    },
+                    "properties": {
+                        "title": "Vacanza a Pantelleria, Agosto 2023. Siamo stati ospitati da Alice, un'amica estremamente gentile che ci ha regalato un soggiorno in questo paradiso di isola, più vicino alla Tunisia che alla Sicilia, un luogo pieno di spiagge e panorami mozzafiato. Non volevo più andarmene da quella terra in cui il tempo scorre più lento e tutto pare più autentico.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1EJalz3HiWlX7pcuK6jwZ2LrsZUMR60BO",
+                        "colore": "giallo"
+                    }
+                },
+             {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.301064, 44.799210]
+                    },
+                    "properties": {
+                        "title": "Una delle ultime foto di mia nonna, Maggio 2021. Intenta nella sua più grande passione, la cucina, è stata una nonna estremamente dolce e affettuosa, forse come ogni nonna è con i suoi nipoti. Non dimenticherò mai i deliziosi pranzi del sabato a base di tortelli d'erbetta o polpettone, il suo implacabile spirito di intrattenitrice e la sua enorme memoria per dettagli di fatti avvenuti a distanza di decine di anni.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1cuZeFbXwrY5x22eJi268uS0iij31p-1n",
+                        "colore": "rosa"
+                    }
+                },
+ {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [11.956927, 36.768077]
+                    },
+                    "properties": {
+                        "title": "Vacanza a Pantelleria, Agosto 2023. Siamo stati ospitati da Alice, un'amica estremamente gentile che ci ha regalato un soggiorno in questo paradiso di isola, più vicino alla Tunisia che alla Sicilia, un luogo pieno di spiagge e panorami mozzafiato. Non volevo più andarmene da quella terra in cui il tempo scorre più lento e tutto pare più autentico.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1EJalz3HiWlX7pcuK6jwZ2LrsZUMR60BO",
+                        "colore": "giallo"
+                    }
+                },
+  {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [12.336492, 45.434443]
+                    },
+                    "properties": {
+                        "title": "Una mia amica appena laureata a Venezia. In questa foto Anita è nel bel mezzo dei festeggiamenti della sua laurea magistrale. è stata una bellissima serata, piena di gioia e nuove conoscenze.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1uam2d3uHe3-i0uY3EDG7WfMvkcIxTGhG",
+                        "colore": "giallo"
+                    }
+                },
+{
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [10.195768, 44.839377]
+                    },
+                    "properties": {
+                        "title": "La foto di uno dei miei migliori amici mentre gioca a casa mia, 2006. Questa foto riprende un amico che ormai non vedo da anni, Ã¨ andato in Ungheria, terra originaria della madre, a fare il ballerino professionista. Guardarla mi riempie di nostalgia. In quelle ore spensierate, durante le quali immaginavamo di combattere contro mostri malvagi o di esplorare terreni sconosciuti, non pensavamo certo a come le cose sarebbero cambiate: le nostre strade separate, la nostra forte amicizia affievolita e i nostri interessi inevitabilmente maturati. Ripenso con grande affetto a questi momenti, di cui sono pregni i luoghi della mia infanzia.",
+                        "imageUrl": "https://drive.google.com/uc?export=view&id=1NfL5o1dLBpjIpq2-3RpSrRKSoJ6065Sm",
+                        "colore": "rosa"
+                    }
+                }
+            ]
+        };
+
+        map.on('load', function () {
+            map.addSource('foto', {
+                type: 'geojson',
+                data: geojsonData
+            });
+
+            map.addLayer({
+                id: 'punti-foto',
+                type: 'circle',
+                source: 'foto',
+                paint: {
+                    'circle-radius': 6,
+                    'circle-color': [
+                        'match',
+                        ['get', 'colore'],
+                        'rosa', '#D26982',
+                        'giallo', '#FFFF00',
+                        'blu', '#00008B',
+                        '#B42222'
+                    ]
+                }
+            });
+
+            map.on('click', 'punti-foto', function (e) {
+                const coordinates = e.features[0].geometry.coordinates.slice();
+                const imageUrl = e.features[0].properties.imageUrl;
+                const title = e.features[0].properties.title;
+
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setHTML(`<strong>${title}</strong><br><img src="${imageUrl}" alt="${title}" style="width:200px;">`)
+                    .addTo(map);
+            });
+
+            map.on('mouseenter', 'punti-foto', function () {
+                map.getCanvas().style.cursor = 'pointer';
+            });
+
+            map.on('mouseleave', 'punti-foto', function () {
+                map.getCanvas().style.cursor = '';
+            });
+        });
+    </script>
+</body>
+</html>
